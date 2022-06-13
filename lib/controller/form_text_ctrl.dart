@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/home.dart';
 
 class TextController extends GetxController {
   var namaLengkap = "".obs;
@@ -15,7 +14,10 @@ class TextController extends GetxController {
     namaLengkap = namaLengkapCtrl.text.obs;
     noTelp = noTelpCtrl.text.obs;
     email = emailCtrl.text.obs;
-    print(namaLengkap);
+    namaLengkapCtrl.dispose();
+    noTelpCtrl.dispose();
+    emailCtrl.dispose();
+    super.onClose();
   }
 
   // Mirip dispose() di Stateful

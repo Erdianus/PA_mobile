@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'mainPage.dart';
 import 'haircut.dart';
 import 'splashScreen.dart';
+import 'login.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -68,7 +70,7 @@ class LandingPage extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => MyHomePage(),
+                    builder: (_) => loginAkun(),
                   ),
                 );
               },
