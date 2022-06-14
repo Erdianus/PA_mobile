@@ -92,17 +92,17 @@ class RegisterAkun extends StatelessWidget {
                     );
                   }
 
-                  if (inputRegister.passwordCtrl.text ==
-                      confirmPasswordCtrl.text) {
-                    inputRegister.onPressed;
-                    Get.to(MyHomePage());
-                  } else if (inputRegister.usernameCtrl.text == "" ||
+                  if (inputRegister.usernameCtrl.text == "" ||
                       inputRegister.emailCtrl.text == "" ||
                       inputRegister.noHpCtrl.text == "" ||
                       inputRegister.passwordCtrl.text == "" ||
                       confirmPasswordCtrl.text == "") {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(snackBarValidasi("Form anda kosong"));
+                  } else if (inputRegister.passwordCtrl.text ==
+                      confirmPasswordCtrl.text) {
+                    inputRegister.onPressed;
+                    Get.to(MyHomePage());
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(snackBarValidasi(
                         "Konfirmasi password anda tidak sesuai"));
