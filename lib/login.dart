@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
-import 'package:posttest5_1915016083_erdianuspagesong/controller/loginCtrl.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/mainPage.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/register.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/controller/registerCtrl.dart';
 
-class loginAkun extends StatelessWidget {
+class loginAkun extends StatefulWidget {
   loginAkun({Key? key}) : super(key: key);
+
   @override
+  State<loginAkun> createState() => _loginAkunState();
+}
+
+final usernameCtrl = TextEditingController();
+final passwordCtrl = TextEditingController();
+String username = "", password = "";
+
+class _loginAkunState extends State<loginAkun> {
+  final RegisterController regis = Get.put(RegisterController());
+  @override
+  var _isObscure = true;
   Widget build(BuildContext context) {
-    final LoginController inputLogin = Get.put(LoginController());
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(30),
@@ -28,7 +39,7 @@ class loginAkun extends StatelessWidget {
                   children: [
                     TextFormField(
                       keyboardType: TextInputType.name,
-                      controller: inputLogin.usernameCtrl,
+                      controller: usernameCtrl,
                       decoration: InputDecoration(
                         labelText: "Username",
                         fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -37,21 +48,19 @@ class loginAkun extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: _isObscure,
                       keyboardType: TextInputType.text,
-                      controller: inputLogin.passwordCtrl,
+                      controller: passwordCtrl,
                       decoration: InputDecoration(
                         labelText: "Password",
                         fillColor: Color.fromARGB(50, 29, 92, 99),
                         filled: true,
                         border: OutlineInputBorder(),
-                        suffixIcon: Obx(
-                          () => IconButton(
-                            icon: Icon(inputLogin.isObscure.value
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                            onPressed: () {},
-                          ),
+                        suffix: InkWell(
+                          onTap: _togglePasswordView,
+                          child: Icon(_isObscure
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                         ),
                       ),
                     ),
@@ -62,12 +71,15 @@ class loginAkun extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (inputLogin.usernameCtrl.text == "admin" &&
-                        inputLogin.passwordCtrl.text == "admin") {
-                      inputLogin.onPressed;
+                    if ((usernameCtrl.text == "admin" &&
+                            passwordCtrl.text == "admin") ||
+                        (usernameCtrl.text == regis.username &&
+                            passwordCtrl.text == regis.password)) {
+                      username = usernameCtrl.value.text;
+                      password = passwordCtrl.value.text;
+
                       Get.to(MyHomePage());
                     } else {
-                      inputLogin.onClose;
                       LoginAlert(context);
                     }
                   },
@@ -90,6 +102,12 @@ class loginAkun extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _togglePasswordView() {
+    setState(() {
+      _isObscure = !_isObscure;
+    });
   }
 }
 
