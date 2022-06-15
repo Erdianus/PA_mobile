@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
 import 'package:posttest5_1915016083_erdianuspagesong/login.dart';
@@ -9,6 +10,8 @@ class RegisterAkun extends StatelessWidget {
   @override
   var confirmPasswordCtrl = TextEditingController();
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference users = firestore.collection("users");
     final RegisterController inputRegister = Get.find();
     return Scaffold(
       body: Container(
@@ -102,6 +105,12 @@ class RegisterAkun extends StatelessWidget {
                   } else if (inputRegister.passwordCtrl.text ==
                       confirmPasswordCtrl.text) {
                     inputRegister.onPressed;
+                    users.add({
+                      'username' : inputRegister.usernameCtrl.text,
+                      'email' : inputRegister.emailCtrl.text,
+                      'noHp' : inputRegister.noHpCtrl.text,
+                      'password' : inputRegister.passwordCtrl.text ?? -1
+                    });
                     Get.to(MyHomePage());
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(snackBarValidasi(
