@@ -14,10 +14,6 @@ class TextController extends GetxController {
     namaLengkap = namaLengkapCtrl.text.obs;
     noTelp = noTelpCtrl.text.obs;
     email = emailCtrl.text.obs;
-    namaLengkapCtrl.dispose();
-    noTelpCtrl.dispose();
-    emailCtrl.dispose();
-    super.onClose();
   }
 
   // Mirip dispose() di Stateful
