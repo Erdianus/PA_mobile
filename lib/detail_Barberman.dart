@@ -65,9 +65,40 @@ class DetailJoniJontor extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+
                 Text(
                   "Joni Jontor",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Ratings :",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w700)),
+                      new Icon(
+                        Icons.star,
+                        size: 25,
+                        color: Colors.yellow,
+                      ),
+                      new Icon(
+                        Icons.star,
+                        size: 25,
+                        color: Colors.yellow,
+                      ),
+                      new Icon(
+                        Icons.star,
+                        size: 25,
+                        color: Colors.yellow,
+                      ),
+                      new Icon(
+                        Icons.star,
+                        size: 25,
+                        color: Colors.yellow,
+                      ),
+                    ],
+                  ),
                 ),
                 Text(
                   "Experience : 2 Tahun",
