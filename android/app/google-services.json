@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "833214491639-sjbt81rt6jp5t54r0rob45mgav6ipgcu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.posttest5_1915016083_erdianuspagesong",
+            "certificate_hash": "cc20586e017207cde1ea4cfcb66070af2ff712e2"
+          }
+        },
+        {
           "client_id": "833214491639-tg4mmjv0ubj4ltb0blivlfg2vbvtpfo4.apps.googleusercontent.com",
           "client_type": 3
         }
