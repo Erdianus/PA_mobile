@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/pemesanan.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/users.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/pemesanan.dart';
 import 'home.dart';
-import 'haircut.dart';
+import '../haircut.dart';
 import 'barberman.dart';
-import 'main.dart';
+import '../main.dart';
 
-class AdminPage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  State<AdminPage> createState() => _AdminPageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _AdminPageState extends State<AdminPage> {
+class _MyHomePageState extends State<MyHomePage> {
   int _index = 1;
   static final List _pages = [
+    Haircuts(),
+    HomePage(),
     PemesananPage(),
-    UsersPage(),
-    Barberman(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -64,16 +63,16 @@ class _AdminPageState extends State<AdminPage> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_rounded),
-            label: "Pemesanan",
+            icon: Icon(Icons.cut_outlined),
+            label: "Haircuts",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
-            label: "Users",
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outlined),
-            label: "Barberman",
+            icon: Icon(Icons.list_alt_rounded),
+            label: "Pemesanan",
           ),
         ],
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'detail_Haircuts.dart';
+import 'pages/detail_Haircuts.dart';
 
 class Haircuts extends StatefulWidget {
   const Haircuts({Key? key}) : super(key: key);

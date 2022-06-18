@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/controller/form_text_ctrl.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/controller/loginCtrl.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/controller/radioCtrl.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/haircut.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/karcis.dart';
+
 import 'package:posttest5_1915016083_erdianuspagesong/main.dart';
 
 int? haircuts = 1;
@@ -15,9 +16,11 @@ class HomePage extends StatelessWidget {
     final TextController inputText = Get.put(TextController());
     final RadioController radioInput = Get.put(RadioController());
     final TextController getText = Get.find();
+    final LoginController signIn = Get.find();
     return Center(
       child: ListView(
         children: [
+          Text(signIn.userId.string),
           Container(
             width: 200,
             height: 200,
@@ -322,7 +325,7 @@ Future<dynamic> CustomAlert(BuildContext context, String namaCustomer) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => DetailTransaksi(),
+                    builder: (_) => HomePage(),
                   ),
                 );
               },

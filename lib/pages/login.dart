@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
-import 'package:posttest5_1915016083_erdianuspagesong/adminPage.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/mainPage.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/register.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/controller/registerCtrl.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/adminPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/usersPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/register.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/controller/loginCtrl.dart';
 
 class loginAkun extends StatefulWidget {
   loginAkun({Key? key}) : super(key: key);
@@ -13,12 +13,11 @@ class loginAkun extends StatefulWidget {
   State<loginAkun> createState() => _loginAkunState();
 }
 
-final emailCtrl = TextEditingController();
-final passwordCtrl = TextEditingController();
-//String username = "", password = "";
-
 class _loginAkunState extends State<loginAkun> {
-  final RegisterController regis = Get.put(RegisterController());
+  final LoginController login = Get.put(LoginController());
+  final currentUser = FirebaseAuth.instance.currentUser;
+  User? user;
+
   @override
   var _isObscure = true;
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class _loginAkunState extends State<loginAkun> {
                       children: [
                         TextFormField(
                           keyboardType: TextInputType.name,
-                          controller: emailCtrl,
+                          controller: login.emailCtrl,
                           decoration: InputDecoration(
                             labelText: "Email",
                             fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -63,7 +62,7 @@ class _loginAkunState extends State<loginAkun> {
                         TextFormField(
                           obscureText: _isObscure,
                           keyboardType: TextInputType.text,
-                          controller: passwordCtrl,
+                          controller: login.passwordCtrl,
                           decoration: InputDecoration(
                             labelText: "Password",
                             fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -84,24 +83,27 @@ class _loginAkunState extends State<loginAkun> {
                     margin: EdgeInsets.only(bottom: 20),
                     child: ElevatedButton(
                       onPressed: () async {
-                        if (emailCtrl.text == "admin" &&
-                            passwordCtrl.text == "admin") {
-                          emailCtrl.text = "";
-                          passwordCtrl.text = "";
+                        if (login.emailCtrl.text == "admin" &&
+                            login.passwordCtrl.text == "admin") {
+                          login.emailCtrl.text = "";
+                          login.passwordCtrl.text = "";
                           Get.offAll(AdminPage());
                         } else {
                           try {
-                            await FirebaseAuth.instance
+                            final credential = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                                    email: emailCtrl.text,
-                                    password: passwordCtrl.text);
-                            emailCtrl.text = "";
-                            passwordCtrl.text = "";
+                                    email: login.emailCtrl.text,
+                                    password: login.passwordCtrl.text);
+                            user = credential.user;
+                            login.userId(user!.uid);
+                            login.onPressed();
+                            login.emailCtrl.text = "";
+                            login.passwordCtrl.text = "";
                             Get.offAll(MyHomePage());
                           } on FirebaseAuthException catch (e) {
                             LoginAlert(context, e.message.toString());
-                            emailCtrl.text = "";
-                            passwordCtrl.text = "";
+                            login.emailCtrl.text = "";
+                            login.passwordCtrl.text = "";
                           }
                         }
                       },

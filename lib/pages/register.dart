@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
-import 'package:posttest5_1915016083_erdianuspagesong/login.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/mainPage.dart';
-import 'controller/registerCtrl.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/login.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/usersPage.dart';
+import '../controller/registerCtrl.dart';
 
 class RegisterAkun extends StatelessWidget {
   RegisterAkun({Key? key}) : super(key: key);
+  User? user;
   @override
   var confirmPasswordCtrl = TextEditingController();
   var passwordCtrl = TextEditingController();
@@ -15,7 +16,8 @@ class RegisterAkun extends StatelessWidget {
   var usernameCtrl = TextEditingController();
   var noHpCtrl = TextEditingController();
   Widget build(BuildContext context) {
-    final RegisterController inputRegister = Get.find();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference users = firestore.collection('users');
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(30),
@@ -128,10 +130,17 @@ class RegisterAkun extends StatelessWidget {
                       } else if (passwordCtrl.text ==
                           confirmPasswordCtrl.text) {
                         try {
-                          await FirebaseAuth.instance
+                          final credential = await FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: emailCtrl.text,
                                   password: passwordCtrl.text);
+                          user = credential.user;
+                          users.add({
+                            'email': emailCtrl.text,
+                            'noHp': int.tryParse(noHpCtrl.text) ?? 1,
+                            'password': passwordCtrl.text,
+                            'userId': user!.uid
+                          });
                           Get.to(loginAkun());
                         } on FirebaseAuthException catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
