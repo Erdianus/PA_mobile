@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/pages/pemesanan.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/pages/users.dart';
-import 'home.dart';
-import '../haircut.dart';
-import 'barberman.dart';
-import '../main.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/ListPemesanan.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/login.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/users/ListPemesananUsers.dart';
+import 'homeUsers.dart';
+import '../../haircut.dart';
+import '../barberman.dart';
+import '../../main.dart';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class AdminPage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  State<AdminPage> createState() => _AdminPageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _AdminPageState extends State<AdminPage> {
-  int _index = 1;
+class _MyHomePageState extends State<MyHomePage> {
+  int _index = 0;
   static final List _pages = [
-    PemesananPage(),
-    UsersPage(),
+    HomePage(),
+    Haircuts(),
     Barberman(),
+    PemesananPageUsers(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -41,14 +45,11 @@ class _AdminPageState extends State<AdminPage> {
               child: Text("Menu"),
             ),
             ListTile(
-              title: Text("Back"),
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => LandingPage(),
-                  ),
-                );
+              title: Text("Logout"),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Get.back();
+                Get.offAll(LandingPage());
               },
             ),
           ],
@@ -64,16 +65,20 @@ class _AdminPageState extends State<AdminPage> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_rounded),
-            label: "Pemesanan",
+            icon: Icon(Icons.home_filled),
+            label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled),
-            label: "Users",
+            icon: Icon(Icons.cut_outlined),
+            label: "Haircuts",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outlined),
             label: "Barberman",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_rounded),
+            label: "Pemesanan",
           ),
         ],
       ),

@@ -22,20 +22,19 @@ class UsersPage extends StatelessWidget {
                 height: 30,
               ),
               StreamBuilder<QuerySnapshot>(
-                  stream: users.snapshots(),
-                  builder: (_, snapshots) {
-                    if (snapshots.hasData) {
-                      return Column(
-                          children: snapshots.data!.docs
-                              .map((e) => ItemCard(
-                                    e.get('email'),
-                                    e.get('noHp'),
-                                  ))
-                              .toList());
-                    } else {
-                      return Text("Loading");
-                    }
-                  }),
+                stream: users.snapshots(),
+                builder: (_, snapshots) {
+                  if (snapshots.hasData) {
+                    return Column(
+                        children: snapshots.data!.docs
+                            .map((e) =>
+                                ItemCardUsers(e.get('email'), e.get('userId')))
+                            .toList());
+                  } else {
+                    return Text("Users Tidak Ada");
+                  }
+                },
+              ),
             ],
           ),
         ],

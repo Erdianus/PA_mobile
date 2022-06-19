@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/detail_Haircuts.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/detail_Haircuts.dart';
 
 class Haircuts extends StatefulWidget {
   const Haircuts({Key? key}) : super(key: key);
@@ -21,6 +21,7 @@ class _HaircutsState extends State<Haircuts> {
             borderRadius: BorderRadius.circular(20),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 6,
+            color: Color.fromARGB(255, 29, 92, 99),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -44,7 +45,12 @@ class _HaircutsState extends State<Haircuts> {
                   ),
                   Text(
                     "Bob Curly",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'typo',
+                        letterSpacing: 5,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -58,6 +64,7 @@ class _HaircutsState extends State<Haircuts> {
             borderRadius: BorderRadius.circular(20),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 6,
+            color: Color.fromARGB(255, 29, 92, 99),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -81,7 +88,12 @@ class _HaircutsState extends State<Haircuts> {
                   ),
                   Text(
                     "Curly Fade",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'typo',
+                        letterSpacing: 5,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -95,6 +107,7 @@ class _HaircutsState extends State<Haircuts> {
             borderRadius: BorderRadius.circular(20),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 6,
+            color: Color.fromARGB(255, 29, 92, 99),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -116,10 +129,15 @@ class _HaircutsState extends State<Haircuts> {
                   SizedBox(
                     width: 20,
                   ),
-                  Text("Messy Hair",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      maxLines: 1),
+                  Text(
+                    "Messy Hair",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'typo',
+                        letterSpacing: 5,
+                        color: Colors.white),
+                  ),
                 ],
               ),
             ),
@@ -132,6 +150,7 @@ class _HaircutsState extends State<Haircuts> {
             borderRadius: BorderRadius.circular(20),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 6,
+            color: Color.fromARGB(255, 29, 92, 99),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -155,7 +174,12 @@ class _HaircutsState extends State<Haircuts> {
                   ),
                   Text(
                     "Pompadour",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'typo',
+                        letterSpacing: 5,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -169,6 +193,7 @@ class _HaircutsState extends State<Haircuts> {
             borderRadius: BorderRadius.circular(20),
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 6,
+            color: Color.fromARGB(255, 29, 92, 99),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -192,7 +217,12 @@ class _HaircutsState extends State<Haircuts> {
                   ),
                   Text(
                     "Undercut",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'typo',
+                        letterSpacing: 5,
+                        color: Colors.white),
                   ),
                 ],
               ),

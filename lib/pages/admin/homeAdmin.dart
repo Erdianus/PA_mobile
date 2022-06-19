@@ -1,26 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/controller/barberCtrl.dart';
+
 import 'package:posttest5_1915016083_erdianuspagesong/controller/form_text_ctrl.dart';
+
+import 'package:posttest5_1915016083_erdianuspagesong/controller/FireStoreController.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/controller/loginCtrl.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/controller/radioCtrl.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/controller/radioCtrl1.dart';
+
 import 'package:posttest5_1915016083_erdianuspagesong/haircut.dart';
 
 import 'package:posttest5_1915016083_erdianuspagesong/main.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/ListPemesanan.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/adminPage.dart';
 
 int? haircuts = 1;
+int? barbermans = 1;
 
-class HomePage extends StatelessWidget {
+FireStoreController fsc = Get.put(FireStoreController());
+final TransaksiController inputText = Get.put(TransaksiController());
+final RadioController radioInput = Get.put(RadioController());
+final TransaksiController getText = Get.put(TransaksiController());
+final BarberController barberInput = Get.put(BarberController());
+LoginController login = Get.put(LoginController());
+
+class HomePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final TextController inputText = Get.put(TextController());
-    final RadioController radioInput = Get.put(RadioController());
-    final TextController getText = Get.find();
-    final LoginController signIn = Get.find();
     return Center(
       child: ListView(
         children: [
-          Text(signIn.userId.string),
           Container(
             width: 200,
             height: 200,
@@ -41,7 +53,7 @@ class HomePage extends StatelessWidget {
             margin: EdgeInsets.all(20),
             child: TextFormField(
               keyboardType: TextInputType.name,
-              controller: inputText.namaLengkapCtrl,
+              controller: inputText.namaCtrl,
               decoration: InputDecoration(
                 labelText: "Nama Lengkap",
                 fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -54,7 +66,7 @@ class HomePage extends StatelessWidget {
             margin: EdgeInsets.all(20),
             child: TextField(
               keyboardType: TextInputType.phone,
-              controller: inputText.noTelpCtrl,
+              controller: inputText.noHpCtrl,
               decoration: InputDecoration(
                 labelText: "No Telpon/Hp",
                 fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -67,7 +79,7 @@ class HomePage extends StatelessWidget {
             margin: EdgeInsets.all(20),
             child: TextField(
               keyboardType: TextInputType.emailAddress,
-              controller: inputText.emailCtrl,
+              controller: inputText.emailTransaksiCtrl,
               decoration: InputDecoration(
                 labelText: "Email",
                 fillColor: Color.fromARGB(50, 29, 92, 99),
@@ -256,6 +268,155 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.all(20),
+            child: Text(
+              "Pilih Barberman : ",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            ///////////////////////////////Radio Joni Jontor
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  Border.all(color: Color.fromARGB(50, 29, 92, 99), width: 0.2),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Joni Jontor",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  Obx(
+                    () => Radio<Barber>(
+                        value: Barber.joniJontor,
+                        groupValue: barberInput.barbermans.value,
+                        onChanged: (value) {
+                          barberInput.barbermans(value);
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            ///////////////////////////////Radio Udin Sedunia
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  Border.all(color: Color.fromARGB(50, 29, 92, 99), width: 0.2),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Udin Sedunia",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  Obx(
+                    () => Radio<Barber>(
+                        value: Barber.udinSedunia,
+                        groupValue: barberInput.barbermans.value,
+                        onChanged: (value) {
+                          barberInput.barbermans(value);
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            ///////////////////////////////Radio Jordi Torres
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  Border.all(color: Color.fromARGB(50, 29, 92, 99), width: 0.2),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Jordi Torres",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  Obx(
+                    () => Radio<Barber>(
+                        value: Barber.jordiTorres,
+                        groupValue: barberInput.barbermans.value,
+                        onChanged: (value) {
+                          barberInput.barbermans(value);
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            ///////////////////////////////Radio James Bond
+            height: 60,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border:
+                  Border.all(color: Color.fromARGB(50, 29, 92, 99), width: 0.2),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "James Bond",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                  Obx(
+                    () => Radio<Barber>(
+                        value: Barber.jemesBond,
+                        groupValue: barberInput.barbermans.value,
+                        onChanged: (value) {
+                          barberInput.barbermans(value);
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(left: 120, right: 120, bottom: 30),
             child: ElevatedButton(
@@ -274,13 +435,13 @@ class HomePage extends StatelessWidget {
                   backgroundColor: Color.fromARGB(200, 29, 92, 99),
                 );
 
-                if (getText.namaLengkap.isNotEmpty &&
-                    getText.noTelp.isNotEmpty &&
-                    getText.email.isNotEmpty) {
-                  CustomAlert(context, getText.namaLengkap.value);
-                } else if (getText.namaLengkap.isEmpty ||
-                    getText.noTelp.isEmpty ||
-                    getText.email.isEmpty) {
+                if (getText.nama.isNotEmpty &&
+                    getText.noHp.isNotEmpty &&
+                    getText.emailTransaksi.isNotEmpty) {
+                  CustomAlert(context, getText.nama.value);
+                } else if (getText.nama.isEmpty ||
+                    getText.noHp.isEmpty ||
+                    getText.emailTransaksi.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               },
@@ -297,37 +458,67 @@ class HomePage extends StatelessWidget {
 }
 
 Future<dynamic> CustomAlert(BuildContext context, String namaCustomer) {
-  final TextController text = Get.find();
+  final TransaksiController text = Get.find();
   final RadioController haircut = Get.find();
+  final BarberController barber = Get.find();
   var jenisHaircut = "";
+  var harga = "";
+  var barberman = "";
+  var jadwal = "";
   if (haircut.haircuts.value == Haircut.bobcurly) {
     jenisHaircut = "Bob Curly";
+    harga = "Rp. 100.000";
   } else if (haircut.haircuts.value == Haircut.curlyfade) {
     jenisHaircut = "Curly Fade";
+    harga = "Rp. 120.000";
   } else if (haircut.haircuts.value == Haircut.messyhair) {
     jenisHaircut = "Messy Hair";
+    harga = "Rp. 120.000";
   } else if (haircut.haircuts.value == Haircut.pompadour) {
     jenisHaircut = "Pompadour";
+    harga = "Rp. 125.000";
   } else if (haircut.haircuts.value == Haircut.undercut) {
     jenisHaircut = "Undercut";
+    harga = "Rp. 120.000";
   }
-
+  if (barber.barbermans.value == Barber.joniJontor) {
+    barberman = "Joni Jontor";
+    jadwal = "09.00-17.00";
+  } else if (barber.barbermans.value == Barber.udinSedunia) {
+    barberman = "Udin Sedunia";
+    jadwal = "09.00-17.00";
+  } else if (barber.barbermans.value == Barber.jordiTorres) {
+    barberman = "Jordi Torres";
+    jadwal = "09.00-17.00";
+  } else if (barber.barbermans.value == Barber.jemesBond) {
+    barberman = "James Bondr";
+    jadwal = "09.00-17.00";
+  }
   return showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         title: Text("Berhasil Memesan"),
         content: Text(
-            "Terimakasih ${text.namaLengkap} sudah memesan di BarberShop kami dengan jenis haircut ${jenisHaircut}"),
+            "Terimakasih ${text.nama} sudah memesan di BarberShop kami dengan jenis haircut ${jenisHaircut}"),
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => HomePage(),
-                  ),
+                String cdate =
+                    DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+                fsc.pesanan.value.add(
+                  {
+                    'name': inputText.namaCtrl.text,
+                    'noHp': inputText.noHpCtrl.text,
+                    'email': inputText.emailTransaksiCtrl.text,
+                    'jenis': jenisHaircut,
+                    'harga': harga,
+                    'barberman': barberman,
+                    'jadwal': jadwal,
+                    'waktu': cdate,
+                  },
                 );
+                Get.to(AdminPage());
               },
               child: Text("OK"))
         ],

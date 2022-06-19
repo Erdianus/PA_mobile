@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
-import 'package:posttest5_1915016083_erdianuspagesong/pages/adminPage.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/pages/usersPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/adminPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/users/usersPage.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/pages/register.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/controller/loginCtrl.dart';
 
@@ -16,11 +17,14 @@ class loginAkun extends StatefulWidget {
 class _loginAkunState extends State<loginAkun> {
   final LoginController login = Get.put(LoginController());
   final currentUser = FirebaseAuth.instance.currentUser;
+
   User? user;
 
   @override
   var _isObscure = true;
   Widget build(BuildContext context) {
+    FirebaseFirestore firestoreLogin = FirebaseFirestore.instance;
+    CollectionReference users = firestoreLogin.collection('users');
     return Scaffold(
       body: Container(
         margin: EdgeInsets.all(30),
@@ -50,7 +54,7 @@ class _loginAkunState extends State<loginAkun> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TextFormField(
-                          keyboardType: TextInputType.name,
+                          keyboardType: TextInputType.emailAddress,
                           controller: login.emailCtrl,
                           decoration: InputDecoration(
                             labelText: "Email",
@@ -96,10 +100,10 @@ class _loginAkunState extends State<loginAkun> {
                                     password: login.passwordCtrl.text);
                             user = credential.user;
                             login.userId(user!.uid);
-                            login.onPressed();
+                            login.email(user!.email);
+                            Get.offAll(MyHomePage());
                             login.emailCtrl.text = "";
                             login.passwordCtrl.text = "";
-                            Get.offAll(MyHomePage());
                           } on FirebaseAuthException catch (e) {
                             LoginAlert(context, e.message.toString());
                             login.emailCtrl.text = "";
@@ -148,7 +152,7 @@ Future<dynamic> LoginAlert(BuildContext context, String pesan) {
         actions: [
           TextButton(
               onPressed: () {
-                Get.to(loginAkun());
+                Get.off(loginAkun());
               },
               child: Text("OK"))
         ],

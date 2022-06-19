@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/login.dart';
 import '../main.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,8 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   splashScreenStart() {
     var duration = const Duration(seconds: 3);
     return Timer(duration, () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LandingPage()));
+      Get.to(LandingPage());
     });
   }
 

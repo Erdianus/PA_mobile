@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ItemCard extends StatelessWidget {
+class ItemCardUsers extends StatelessWidget {
   final String email;
-  final int noHp;
+  final String userId;
 
-  ItemCard(
+  ItemCardUsers(
     this.email,
-    this.noHp,
+    this.userId,
   );
 
   @override
@@ -29,29 +29,10 @@ class ItemCard extends StatelessWidget {
                 child: Text(email),
               ),
               Text(
-                "$noHp",
+                "$userId",
               )
             ],
           ),
-          Row(
-            children: [
-              SizedBox(
-                height: 40,
-                width: 60,
-                child: RaisedButton(
-                    shape: CircleBorder(),
-                    color: Colors.green[900],
-                    child: Center(
-                        child: Icon(
-                      Icons.arrow_upward,
-                      color: Colors.white,
-                    )),
-                    onPressed: () {
-                      // if (onUpdate != null) onUpdate();
-                    }),
-              ),
-            ],
-          )
         ],
       ),
     );

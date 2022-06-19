@@ -3,18 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
 import 'package:posttest5_1915016083_erdianuspagesong/pages/login.dart';
-import 'package:posttest5_1915016083_erdianuspagesong/pages/usersPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/users/usersPage.dart';
 import '../controller/registerCtrl.dart';
 
 class RegisterAkun extends StatelessWidget {
   RegisterAkun({Key? key}) : super(key: key);
   User? user;
-  @override
   var confirmPasswordCtrl = TextEditingController();
   var passwordCtrl = TextEditingController();
   var emailCtrl = TextEditingController();
   var usernameCtrl = TextEditingController();
   var noHpCtrl = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference users = firestore.collection('users');
@@ -25,7 +25,7 @@ class RegisterAkun extends StatelessWidget {
           child: ListView(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                
                 children: [
                   Text(
                     "Register Akun Anda",
@@ -36,36 +36,10 @@ class RegisterAkun extends StatelessWidget {
                     height: 30,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.name,
-                    controller: usernameCtrl,
-                    decoration: InputDecoration(
-                      labelText: "Username",
-                      fillColor: Color.fromARGB(50, 29, 92, 99),
-                      filled: true,
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: emailCtrl,
                     decoration: InputDecoration(
                       labelText: "Email",
-                      fillColor: Color.fromARGB(50, 29, 92, 99),
-                      filled: true,
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    keyboardType: TextInputType.phone,
-                    controller: noHpCtrl,
-                    decoration: InputDecoration(
-                      labelText: "No Hp/Telp",
                       fillColor: Color.fromARGB(50, 29, 92, 99),
                       filled: true,
                       border: OutlineInputBorder(),
@@ -120,9 +94,7 @@ class RegisterAkun extends StatelessWidget {
                         );
                       }
 
-                      if (usernameCtrl.text == "" ||
-                          emailCtrl.text == "" ||
-                          noHpCtrl.text == "" ||
+                      if (emailCtrl.text == "" ||
                           passwordCtrl.text == "" ||
                           confirmPasswordCtrl.text == "") {
                         ScaffoldMessenger.of(context)
@@ -135,9 +107,8 @@ class RegisterAkun extends StatelessWidget {
                                   email: emailCtrl.text,
                                   password: passwordCtrl.text);
                           user = credential.user;
-                          users.add({
+                          users.doc(user!.uid).set({
                             'email': emailCtrl.text,
-                            'noHp': int.tryParse(noHpCtrl.text) ?? 1,
                             'password': passwordCtrl.text,
                             'userId': user!.uid
                           });
