@@ -11,7 +11,9 @@ import 'package:posttest5_1915016083_erdianuspagesong/haircut.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/main.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/ListPemesanan.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/adminPage.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/admin/users.dart';
 import 'package:posttest5_1915016083_erdianuspagesong/pages/users/homeUsers.dart';
+import 'package:posttest5_1915016083_erdianuspagesong/pages/users/usersPage.dart';
 
 class UpdatePageUsers extends StatelessWidget {
   final String id;
@@ -23,7 +25,7 @@ class UpdatePageUsers extends StatelessWidget {
     TransaksiController inputText = Get.put(TransaksiController());
     FireStoreController fsc = Get.find();
     final RadioController haircut = Get.find();
-    final BarberController barber = Get.find();
+    final BarberController barber = Get.put(BarberController());
     var jenisHaircut = "";
     var harga = "";
     var barberman = "";
@@ -448,6 +450,8 @@ class UpdatePageUsers extends StatelessWidget {
                     'waktu': cdate,
                   });
                   UpdateAlert(context, inputText.namaCtrl.text);
+                  inputText.namaCtrl.text = "";
+                  inputText.noHpCtrl.text = "";
                 },
                 child: Text('Update'),
               ),
@@ -469,7 +473,7 @@ Future<dynamic> UpdateAlert(BuildContext context, String pesan) {
         actions: [
           TextButton(
               onPressed: () {
-                Get.off(AdminPage());
+                Get.back();
               },
               child: Text("OK"))
         ],

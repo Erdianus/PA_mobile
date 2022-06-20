@@ -448,6 +448,8 @@ class UpdatePageAdmin extends StatelessWidget {
                     'waktu': cdate,
                   });
                   UpdateAlert(context, inputText.namaCtrl.text);
+                  inputText.namaCtrl.text = "";
+                  inputText.noHpCtrl.text = "";
                 },
                 child: Text('Update'),
               ),
@@ -469,7 +471,7 @@ Future<dynamic> UpdateAlert(BuildContext context, String pesan) {
         actions: [
           TextButton(
               onPressed: () {
-                Get.off(AdminPage());
+                Get.back();
               },
               child: Text("OK"))
         ],

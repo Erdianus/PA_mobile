@@ -522,7 +522,7 @@ Future<dynamic> CustomAlert(BuildContext context, String namaCustomer) {
                     'waktu': cdate,
                   },
                 );
-                Get.to(MyHomePage());
+                Get.back();
               },
               child: Text("OK"))
         ],

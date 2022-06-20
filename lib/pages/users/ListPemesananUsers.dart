@@ -77,7 +77,7 @@ Future<dynamic> DeleteAlert(BuildContext context) {
         actions: [
           TextButton(
               onPressed: () {
-                Get.off(UsersPage());
+                Get.back();
               },
               child: Text("OK"))
         ],
