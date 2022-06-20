@@ -21,9 +21,9 @@ class UpdatePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TransaksiController inputText = Get.put(TransaksiController());
-    FireStoreController fsc = Get.find();
-    final RadioController haircut = Get.find();
-    final BarberController barber = Get.find();
+    FireStoreController fsc = Get.put(FireStoreController());
+    final RadioController haircut = Get.put(RadioController());
+    final BarberController barber = Get.put(BarberController());
     var jenisHaircut = "";
     var harga = "";
     var barberman = "";

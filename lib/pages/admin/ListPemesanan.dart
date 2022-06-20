@@ -48,8 +48,8 @@ class PemesananPageAdmin extends StatelessWidget {
                                           builder: (_) =>
                                               UpdatePageAdmin(e.id))),
                                   onDelete: () {
-                                    fsc.pesanan.value.doc(e.id)..delete();
                                     DeleteAlert(context);
+                                    fsc.pesanan.value.doc(e.id)..delete();
                                   }),
                             )
                             .toList(),
@@ -74,7 +74,7 @@ Future<dynamic> DeleteAlert(BuildContext context) {
         actions: [
           TextButton(
               onPressed: () {
-                Get.off(AdminPage());
+                Get.back();
               },
               child: Text("OK"))
         ],

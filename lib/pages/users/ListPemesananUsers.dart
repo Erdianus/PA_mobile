@@ -51,8 +51,8 @@ class PemesananPageUsers extends StatelessWidget {
                                           builder: (_) =>
                                               UpdatePageUsers(e.id))),
                                   onDelete: () {
-                                    fsc.pesanan.value.doc(e.id)..delete();
                                     DeleteAlert(context);
+                                    fsc.pesanan.value.doc(e.id)..delete();
                                   }),
                             )
                             .toList(),
